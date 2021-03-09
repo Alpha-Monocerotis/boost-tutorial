@@ -1,30 +1,29 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <boost/thread.hpp>
 #include <boost/shared_ptr.hpp>
 
-using namespace std;
-
 boost::mutex mut;
 
-inline void love(string girl) {
+inline void love(std::string girl) {
     boost::lock_guard<boost::mutex> lock(mut);
-    cout << "I Love " << girl << endl;
+    std::cout << "I Love " << girl << std::endl;
 }
 
 int main(int argc, char* argv[]) {
     if(argc < 2) {
-        cout << "File path required" << endl;
+        std::cout << "File path required" << std::endl;
         return -1;
     }
-    vector<string> girls;
-    freopen(argv[1], "r", stdin);
-    string girl;
-    while(cin>> girl) {
+    std::vector<std::string> girls;
+    std::freopen(argv[1], "r", stdin);
+    std::string girl;
+    while(std::cin>> girl) {
         girls.push_back(girl);
     }
     int thread_num = girls.size();
-    vector<boost::thread> threadPool(thread_num);
+    std::vector<boost::thread> threadPool(thread_num);
     for(int i=0;i<thread_num;i++) {
         threadPool[i] = boost::thread(love, girls[i]);
     }

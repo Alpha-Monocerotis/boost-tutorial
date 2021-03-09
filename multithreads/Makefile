@@ -13,7 +13,7 @@ LOCAL_BIN_DIR = /usr/local/bin
 LOCAL_LIB_DIR = /usr/local/lib
 
 main : main.cpp
-	@g++ -o main main.cpp -lpthread -lboost_thread-mt -lboost_system
+	@g++ -std=c++11 -o main main.cpp -lpthread -lboost_thread -lboost_system
 	@echo $(GREEN)Building target $@$(TAIL)
 
 install : main
